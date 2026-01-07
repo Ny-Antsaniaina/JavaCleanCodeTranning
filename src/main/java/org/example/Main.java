@@ -7,6 +7,10 @@ import org.example.training.exo2.solution.OrderService;
 import org.example.training.exo3.solution.Payment;
 import org.example.training.exo3.solution.PaymentService;
 import org.example.training.exo3.solution.PaymentVerification;
+import org.example.training.exo5.problem.NotificationService;
+import org.example.training.exo5.solution.Notification;
+import org.example.training.exo5.solution.NotificationSenderFactory;
+import org.example.training.exo5.solution.TypeNotification;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,5 +30,15 @@ public class Main {
 
         Payment payment = new Payment.Builder().cardNumber("7894561231234567").cvv("aze").amount(54555).build();
         paymentService.savePayment(payment);
+
+        NotificationSenderFactory factory = new NotificationSenderFactory();
+        NotificationService service = new NotificationService(factory);
+
+        Notification notification = new Notification.Builder()
+                .type(TypeNotification.EMAIL)
+                .message("Hello Clean Code 🚀")
+                .build();
+
+        service.notify(notification);
     }
 }
