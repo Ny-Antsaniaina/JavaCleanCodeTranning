@@ -11,6 +11,8 @@ import org.example.training.exo5.problem.NotificationService;
 import org.example.training.exo5.solution.Notification;
 import org.example.training.exo5.solution.NotificationSenderFactory;
 import org.example.training.exo5.solution.TypeNotification;
+import org.example.training.exo6.solution.OrderProcesserFactory;
+import org.example.training.exo6.solution.PaymentType;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,5 +42,10 @@ public class Main {
                 .build();
 
         service.notify(notification);
+
+        OrderProcesserFactory orderProcesserFactory = new OrderProcesserFactory();
+        org.example.training.exo6.solution.OrderService orderService1 = new org.example.training.exo6.solution.OrderService(orderProcesserFactory);
+        org.example.training.exo6.solution.Order order1 = new org.example.training.exo6.solution.Order.Builder().payment(PaymentType.CARD).amount(45).build();
+        orderService1.process(order1);
     }
 }
